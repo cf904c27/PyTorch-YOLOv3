@@ -133,3 +133,5 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
     plt.gca().yaxis.set_major_locator(NullLocator())
     plt.savefig('output/%d.png' % (img_i), bbox_inches='tight', pad_inches=0.0)
     plt.close()
+
+retrun imgs ,img_detections

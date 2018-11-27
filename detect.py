@@ -56,6 +56,7 @@ Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 imgs = []           # Stores image paths
 img_detections = [] # Stores detections for each image index
 label = []
+img_path = []
 
 print ('\nPerforming object detection:')
 prev_time = time.time()
@@ -108,27 +109,30 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
         n_cls_preds = len(unique_labels)
         bbox_colors = random.sample(colors, n_cls_preds)
         for x1, y1, x2, y2, conf, cls_conf, cls_pred in detections:
+            
+            if classes[int(cls_pred)] != 'person':
+                continue
+            else:
+                print ('\t+ Label: %s, Conf: %.5f' % (classes[int(cls_pred)], cls_conf.item()))
+                label.append(classes[int(cls_pred)])
+                img_path.append(path)
 
-            print ('\t+ Label: %s, Conf: %.5f' % (classes[int(cls_pred)], cls_conf.item()))
-            print(classes[int(cls_pred)])
-            label.append(classes[int(cls_pred)])
+                # Rescale coordinates to original dimensions
+                box_h = ((y2 - y1) / unpad_h) * img.shape[0]
+                box_w = ((x2 - x1) / unpad_w) * img.shape[1]
+                y1 = ((y1 - pad_y // 2) / unpad_h) * img.shape[0]
+                x1 = ((x1 - pad_x // 2) / unpad_w) * img.shape[1]
 
-            # Rescale coordinates to original dimensions
-            box_h = ((y2 - y1) / unpad_h) * img.shape[0]
-            box_w = ((x2 - x1) / unpad_w) * img.shape[1]
-            y1 = ((y1 - pad_y // 2) / unpad_h) * img.shape[0]
-            x1 = ((x1 - pad_x // 2) / unpad_w) * img.shape[1]
-
-            color = bbox_colors[int(np.where(unique_labels == int(cls_pred))[0])]
-            # Create a Rectangle patch
-            bbox = patches.Rectangle((x1, y1), box_w, box_h, linewidth=2,
-                                    edgecolor=color,
-                                    facecolor='none')
-            # Add the bbox to the plot
-            ax.add_patch(bbox)
-            # Add label
-            plt.text(x1, y1, s=classes[int(cls_pred)], color='white', verticalalignment='top',
-                    bbox={'color': color, 'pad': 0})
+                color = bbox_colors[int(np.where(unique_labels == int(cls_pred))[0])]
+                # Create a Rectangle patch
+                bbox = patches.Rectangle((x1, y1), box_w, box_h, linewidth=2,
+                                        edgecolor=color,
+                                        facecolor='none')
+                # Add the bbox to the plot
+                ax.add_patch(bbox)
+                # Add label
+                plt.text(x1, y1, s=classes[int(cls_pred)], color='white', verticalalignment='top',
+                        bbox={'color': color, 'pad': 0})
 
     # Save generated image with detections
     plt.axis('off')
@@ -137,6 +141,5 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
     plt.savefig('output/%d.png' % (img_i), bbox_inches='tight', pad_inches=0.0)
     plt.close()
     
-print(imgs)
-print(img_detections)   
+print(img_path)  
 print(label)

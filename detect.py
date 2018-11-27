@@ -31,7 +31,7 @@ parser.add_argument('--n_cpu', type=int, default=8, help='number of cpu threads 
 parser.add_argument('--img_size', type=int, default=416, help='size of each image dimension')
 parser.add_argument('--use_cuda', type=bool, default=True, help='whether to use cuda if available')
 opt = parser.parse_args()
-print(opt)
+#print(opt)
 
 cuda = torch.cuda.is_available() and opt.use_cuda
 
@@ -74,7 +74,7 @@ for batch_i, (img_paths, input_imgs) in enumerate(dataloader):
     current_time = time.time()
     inference_time = datetime.timedelta(seconds=current_time - prev_time)
     prev_time = current_time
-    print ('\t+ Batch %d, Inference Time: %s' % (batch_i, inference_time))
+    #print ('\t+ Batch %d, Inference Time: %s' % (batch_i, inference_time))
 
     # Save image and detections
     imgs.extend(img_paths)
@@ -141,5 +141,11 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
     plt.savefig('output/%d.png' % (img_i), bbox_inches='tight', pad_inches=0.0)
     plt.close()
     
-print(img_path)  
-print(label)
+
+file = open("img_path.txt","w")
+file.write(img_path)
+file.close()
+
+file2 = open("label.txt","w")
+file2.write(label)  
+file2.close()

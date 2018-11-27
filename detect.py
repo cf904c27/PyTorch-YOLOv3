@@ -55,6 +55,7 @@ Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
 imgs = []           # Stores image paths
 img_detections = [] # Stores detections for each image index
+lable = []
 
 print ('\nPerforming object detection:')
 prev_time = time.time()
@@ -109,6 +110,8 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
         for x1, y1, x2, y2, conf, cls_conf, cls_pred in detections:
 
             print ('\t+ Label: %s, Conf: %.5f' % (classes[int(cls_pred)], cls_conf.item()))
+            print(classes[int(cls_pred)])
+            label.append(classes[int(cls_pred)])
 
             # Rescale coordinates to original dimensions
             box_h = ((y2 - y1) / unpad_h) * img.shape[0]
@@ -135,4 +138,5 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
     plt.close()
     
 print(imgs)
-print(img_detections)     
+print(img_detections)   
+print(label)

@@ -9,6 +9,7 @@ import sys
 import time
 import datetime
 import argparse
+import pandas as pd
 
 import torch
 from torch.utils.data import DataLoader
@@ -134,4 +135,6 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
     plt.savefig('output/%d.png' % (img_i), bbox_inches='tight', pad_inches=0.0)
     plt.close()
 
-return imgs ,img_detections
+import pandas as pd
+df = pd.DataFrame({'user':imgs,'label': img_detections})
+df.to_csv('result.csv')

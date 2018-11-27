@@ -55,7 +55,7 @@ Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
 imgs = []           # Stores image paths
 img_detections = [] # Stores detections for each image index
-lable = []
+label = []
 
 print ('\nPerforming object detection:')
 prev_time = time.time()

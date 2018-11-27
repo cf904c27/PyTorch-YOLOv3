@@ -136,5 +136,6 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
     plt.close()
 
 import pandas as pd
-df = pd.DataFrame({'user':imgs,'label': img_detections})
-df.to_csv('result.csv')
+
+print(len(imgs))
+print(len(img_detections))

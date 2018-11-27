@@ -143,11 +143,5 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
     
 
 file = open("img_path.txt","w")
-for x in img_path:
-    file.write(x)
+file.write("\n".join(img_path))
 file.close()
-
-file2 = open("label.txt","w")
-for y in label:
-    file2.write(y)  
-file2.close()

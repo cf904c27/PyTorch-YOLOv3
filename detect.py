@@ -74,7 +74,7 @@ for batch_i, (img_paths, input_imgs) in enumerate(dataloader):
     current_time = time.time()
     inference_time = datetime.timedelta(seconds=current_time - prev_time)
     prev_time = current_time
-    #print ('\t+ Batch %d, Inference Time: %s' % (batch_i, inference_time))
+    print ('\t+ Batch %d, Inference Time: %s' % (batch_i, inference_time))
 
     # Save image and detections
     imgs.extend(img_paths)

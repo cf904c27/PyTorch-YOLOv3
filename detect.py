@@ -89,7 +89,7 @@ print ('\nSaving images:')
 for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
 
     print ("(%d) Image: '%s'" % (img_i, path))
-
+    '''
     # Create plot
     img = np.array(Image.open(path))
     plt.figure()
@@ -102,6 +102,7 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
     # Image height and width after padding is removed
     unpad_h = opt.img_size - pad_y
     unpad_w = opt.img_size - pad_x
+    '''
 
     # Draw bounding boxes and labels of detections
     if detections is not None:
@@ -116,7 +117,7 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
                 print ('\t+ Label: %s, Conf: %.5f' % (classes[int(cls_pred)], cls_conf.item()))
                 label.append(classes[int(cls_pred)])
                 img_path.append(path)
-
+                '''
                 # Rescale coordinates to original dimensions
                 box_h = ((y2 - y1) / unpad_h) * img.shape[0]
                 box_w = ((x2 - x1) / unpad_w) * img.shape[1]
@@ -133,13 +134,13 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
                 # Add label
                 plt.text(x1, y1, s=classes[int(cls_pred)], color='white', verticalalignment='top',
                         bbox={'color': color, 'pad': 0})
-
+                '''
     # Save generated image with detections
-    plt.axis('off')
-    plt.gca().xaxis.set_major_locator(NullLocator())
-    plt.gca().yaxis.set_major_locator(NullLocator())
-    plt.savefig('output/%d.png' % (img_i), bbox_inches='tight', pad_inches=0.0)
-    plt.close()
+    #plt.axis('off')
+    #plt.gca().xaxis.set_major_locator(NullLocator())
+    #plt.gca().yaxis.set_major_locator(NullLocator())
+    #plt.savefig('output/%d.png' % (img_i), bbox_inches='tight', pad_inches=0.0)
+    #plt.close()
     
 
 file = open("img_path.txt","w")

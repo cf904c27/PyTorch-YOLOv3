@@ -113,9 +113,7 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
             
             if classes[int(cls_pred)] != 'person':
                 continue
-                
-            elif classes[int(cls_pred)] == 'person' & cls_conf.item() < 0.5:
-                continue
+               
             else:
                 print ('\t+ Label: %s, Conf: %.5f' % (classes[int(cls_pred)], cls_conf.item()))
                 label.append(classes[int(cls_pred)])

@@ -111,16 +111,12 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
         bbox_colors = random.sample(colors, n_cls_preds)
         for x1, y1, x2, y2, conf, cls_conf, cls_pred in detections:
             
-            if classes[int(cls_pred)] != 'person':
+            if classes[int(cls_pred)] != 'person' & cls_conf.item() < 0.5:
                 continue
             else:
                 print ('\t+ Label: %s, Conf: %.5f' % (classes[int(cls_pred)], cls_conf.item()))
-                
-                if cls_conf.item() < 0.5:
-                    break
-                else:
-                    label.append(classes[int(cls_pred)])
-                    img_path.append(path)
+                label.append(classes[int(cls_pred)])
+                img_path.append(path)
                 '''
                 # Rescale coordinates to original dimensions
                 box_h = ((y2 - y1) / unpad_h) * img.shape[0]

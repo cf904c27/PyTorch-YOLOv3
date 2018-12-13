@@ -117,7 +117,7 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
                 print ('\t+ Label: %s, Conf: %.5f' % (classes[int(cls_pred)], cls_conf.item()))
                 
                 if cls_conf.item() < 0.5:
-                    continue
+                    break
                 else:
                     label.append(classes[int(cls_pred)])
                     img_path.append(path)

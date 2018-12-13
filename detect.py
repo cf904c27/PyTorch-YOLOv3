@@ -115,8 +115,12 @@ for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
                 continue
             else:
                 print ('\t+ Label: %s, Conf: %.5f' % (classes[int(cls_pred)], cls_conf.item()))
-                label.append(classes[int(cls_pred)])
-                img_path.append(path)
+                
+                if cls_conf.item() < 0.5:
+                    continue
+                else:
+                    label.append(classes[int(cls_pred)])
+                    img_path.append(path)
                 '''
                 # Rescale coordinates to original dimensions
                 box_h = ((y2 - y1) / unpad_h) * img.shape[0]

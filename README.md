@@ -12,7 +12,7 @@
 [[Paper]](https://pjreddie.com/media/files/papers/YOLOv3.pdf) [[Original Implementation]](https://github.com/pjreddie/darknet)
 
 ## 安裝
-    $ git clone https://github.com/eriklindernoren/PyTorch-YOLOv3
+    $ git clone https://github.com/cf904c27/PyTorch-YOLOv3
     $ cd PyTorch-YOLOv3/
     $ sudo pip3 install -r requirements.txt
 

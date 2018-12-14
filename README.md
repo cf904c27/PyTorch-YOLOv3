@@ -3,12 +3,8 @@
 
 ## Table of Contents
 - [PyTorch-YOLOv3](#pytorch-yolov3)
-  * [Table of Contents](#table-of-contents)
   * [Paper](#paper)
-  * [Installation](#installation)
-  * [Inference](#inference)
-  * [Test](#test)
-  * [Train](#train)
+  * [安裝](#安裝)
   * [Credit](#credit)
 
 ## Paper

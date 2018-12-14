@@ -20,6 +20,10 @@
     $ cd weights/
     $ bash download_weights.sh
 
+## 使用範例
+    $ !python3 detect.py --image_folder /content/PyTorch-YOLOv3/temp/part1
+    $ 得到含有人物圖片路徑的TXT檔  img_path.txt
+
 
 ## Credit
 ```

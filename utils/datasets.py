@@ -2,6 +2,7 @@ import glob
 import random
 import os
 import numpy as np
+import cv2
 
 import torch
 
@@ -24,7 +25,11 @@ class ImageFolder(Dataset):
     def __getitem__(self, index):
         img_path = self.files[index % len(self.files)]
         # Extract image
-        img = np.array(Image.open(img_path))
+        #img = np.array(Image.open(img_path))
+        draw = cv2.imread(img_path)
+        draw = cv2.cvtColor(draw, cv2.COLOR_BGR2RGB)
+        img = np.array(draw)
+        
         h, w, _ = img.shape
         dim_diff = np.abs(h - w)
         # Upper (left) and lower (right) padding
